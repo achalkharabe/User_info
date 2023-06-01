@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+  
   const [title, setTitle] = useState("no schange");
-  const [age, setAge] = useState(0);
+  const [age, setAge] = useState<number>(0);
+  const [cmp,setCmp]=useState("")
   const UserApi = () => {
     return new Promise<any>((resolve, reject) => {
       return setTimeout(() => {
@@ -20,6 +22,14 @@ function App() {
    });
   };
 
+  const UserCmpApi = () => {
+    return new Promise<any>((resolve, reject) => {
+      return setTimeout(() => {
+       resolve({cmp:'TCS' });
+     }, 1000);
+   });
+  };
+
   const getUserData = async () => {
     const userDAta = await UserApi();
     console.log(userDAta);
@@ -31,8 +41,15 @@ function App() {
    const userAgeDAta = await UserAgeApi();
    console.log(userAgeDAta);
    const { age } = userAgeDAta;
-  setTitle(age);
+  setAge(age);
   };
+
+  const getUserCmp = async () => {
+    const userCmpDAta = await UserCmpApi();
+    console.log(userCmpDAta);
+    const { cmp } = userCmpDAta;
+   setCmp(cmp);
+   };
 
   useEffect(() => {
     getUserData();
@@ -42,9 +59,14 @@ function App() {
    getUserAge();
   }, []);
 
+  useEffect(() => {
+    getUserCmp();
+   }, []);
+ 
 
   return <div>userinfo{title}<br></br>
-  {age}</div>;
+  {age}<br></br>
+  {cmp}</div>;
 }
 
 
