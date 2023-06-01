@@ -66,7 +66,7 @@ function App() {
 
   return <div>userinfo{title}<br></br>
   {age}<br></br>
-  {cmp}</div>;
+  {cmp}<br></br></div>;
 }
 
 
